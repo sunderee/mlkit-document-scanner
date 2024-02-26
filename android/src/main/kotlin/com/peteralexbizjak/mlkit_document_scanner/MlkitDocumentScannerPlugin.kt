@@ -1,22 +1,21 @@
 package com.peteralexbizjak.mlkit_document_scanner
 
+
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
 import com.google.mlkit.vision.documentscanner.GmsDocumentScannerOptions
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
+import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import com.peteralexbizjak.mlkit_document_scanner.MLKitDocumentScanner
-
-com.peteralexbizjak.mlkit_document_scanner.MLKitDocumentScannerConfiguration
-import io.flutter.embedding.android.FlutterActivity
-import io.flutter.embedding.engine.plugins.activity.ActivityAware
-import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 
 /** MLKitDocumentScannerPlugin */
-class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+internal class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
     private var flutterActivity: FlutterActivity? = null
 
@@ -78,12 +77,13 @@ class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
             maximumNumberOfPages = call.argument<Int>(ARGUMENT_NUMBER_OF_PAGES) ?: 1,
             galleryImportAllowed = call.argument<Boolean>(ARGUMENT_GALLERY_IMPORT_ALLOWED) ?: false,
             scannerMode = call.argument<Int>(ARGUMENT_SCANNER_MODE)?.let {
-                if (kotlin.collections.listOf(
-                        GmsDocumentScannerOptions.SCANNER_MODE_FULL,
-                        GmsDocumentScannerOptions.SCANNER_MODE_BASE,
-                        GmsDocumentScannerOptions.SCANNER_MODE_BASE_WITH_FILTER
-                    ).contains(it)
-                ) it else GmsDocumentScannerOptions.SCANNER_MODE_FULL
+                val allowedScannerModes = listOf(
+                    GmsDocumentScannerOptions.SCANNER_MODE_FULL,
+                    GmsDocumentScannerOptions.SCANNER_MODE_BASE,
+                    GmsDocumentScannerOptions.SCANNER_MODE_BASE_WITH_FILTER
+                )
+
+                if (allowedScannerModes.contains(it)) it else GmsDocumentScannerOptions.SCANNER_MODE_FULL
             } ?: GmsDocumentScannerOptions.SCANNER_MODE_FULL
         )
     }
@@ -92,9 +92,18 @@ class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
         result: Result,
         pages: List<GmsDocumentScanningResult.Page>
     ) {
+        val firstImageBytes = pages.firstOrNull()
+            ?.let { flutterActivity?.contentResolver?.openInputStream(it.imageUri) }
+            ?.use { it.readBytes() }
+
+        result.success(firstImageBytes)
     }
 
-    private fun onPdfDocumentScanned(result: Result, pdf: GmsDocumentScanningResult.Pdf) {}
+    private fun onPdfDocumentScanned(result: Result, pdf: GmsDocumentScanningResult.Pdf) {
+        val pdfFileBytes = pdf.uri.toFile().readBytes()
+
+        result.success(pdfFileBytes)
+    }
 
     companion object {
         private const val METHOD_INIT_DOCUMENT_SCANNER = "initDocumentScanner"
