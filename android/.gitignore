@@ -3,6 +3,9 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/gradlew
+/gradlew.bat
+gradle-wrapper.jar
 .DS_Store
 /build
 /captures
