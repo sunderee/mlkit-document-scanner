@@ -50,6 +50,8 @@ android {
     }
 
     dependencies {
+        implementation 'com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1'
+
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.0.0'
     }
