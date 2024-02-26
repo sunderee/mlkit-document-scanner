@@ -15,9 +15,9 @@ typealias OnTaskFailedCallback = (exception: Exception) -> Unit
 
 internal class MLKitDocumentScanner(
     private val activity: AppCompatActivity,
-    maximumNumberOfPages: Int = 1,
-    galleryImportAllowed: Boolean = true,
-    scannerMode: Int = GmsDocumentScannerOptions.SCANNER_MODE_FULL,
+    maximumNumberOfPages: Int,
+    galleryImportAllowed: Boolean,
+    scannerMode: Int
 ) {
     private var documentScannerOptions: GmsDocumentScannerOptions =
         GmsDocumentScannerOptions.Builder()
