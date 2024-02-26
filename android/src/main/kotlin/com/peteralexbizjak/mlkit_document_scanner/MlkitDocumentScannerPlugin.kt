@@ -14,7 +14,6 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-/** MLKitDocumentScannerPlugin */
 internal class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private lateinit var channel: MethodChannel
     private var flutterActivity: FlutterActivity? = null
@@ -33,7 +32,7 @@ internal class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, Ac
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
-        if (call.method == METHOD_INIT_DOCUMENT_SCANNER) {
+        if (call.method == METHOD_DOCUMENT_SCANNER) {
             val arguments = parseArgumentsForInitializingDocumentScanner(call)
 
             flutterActivity?.activity?.let {
@@ -44,7 +43,6 @@ internal class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, Ac
                     scannerMode = arguments.scannerMode
                 )
                     .beginListeningForDocumentScannerOutputs(
-                        onPageDocumentScanned = { pages -> onPageDocumentScanned(result, pages) },
                         onPDFDocumentScanned = { pdf -> onPdfDocumentScanned(result, pdf) },
                         onException = { exception ->
                             result.error(
@@ -88,17 +86,6 @@ internal class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, Ac
         )
     }
 
-    private fun onPageDocumentScanned(
-        result: Result,
-        pages: List<GmsDocumentScanningResult.Page>
-    ) {
-        val firstImageBytes = pages.firstOrNull()
-            ?.let { flutterActivity?.contentResolver?.openInputStream(it.imageUri) }
-            ?.use { it.readBytes() }
-
-        result.success(firstImageBytes)
-    }
-
     private fun onPdfDocumentScanned(result: Result, pdf: GmsDocumentScanningResult.Pdf) {
         val pdfFileBytes = pdf.uri.toFile().readBytes()
 
@@ -106,7 +93,7 @@ internal class MLKitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, Ac
     }
 
     companion object {
-        private const val METHOD_INIT_DOCUMENT_SCANNER = "initDocumentScanner"
+        private const val METHOD_DOCUMENT_SCANNER = "initDocumentScannerAndReceivePDFBytes"
         private const val ARGUMENT_NUMBER_OF_PAGES = "maximumNumberOfPages"
         private const val ARGUMENT_GALLERY_IMPORT_ALLOWED = "galleryImportAllowed"
         private const val ARGUMENT_SCANNER_MODE = "scannerMode"

@@ -9,7 +9,6 @@ import com.google.mlkit.vision.documentscanner.GmsDocumentScanning
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import java.lang.Exception
 
-typealias OnPageDocumentScannedCallback = (pages: List<GmsDocumentScanningResult.Page>) -> Unit
 typealias OnPDFDocumentScannedCallback = (pdf: GmsDocumentScanningResult.Pdf) -> Unit
 typealias OnTaskFailedCallback = (exception: Exception) -> Unit
 
@@ -23,15 +22,11 @@ internal class MLKitDocumentScanner(
         GmsDocumentScannerOptions.Builder()
             .setGalleryImportAllowed(galleryImportAllowed)
             .setPageLimit(maximumNumberOfPages)
-            .setResultFormats(
-                GmsDocumentScannerOptions.RESULT_FORMAT_JPEG,
-                GmsDocumentScannerOptions.RESULT_FORMAT_PDF
-            )
+            .setResultFormats(GmsDocumentScannerOptions.RESULT_FORMAT_PDF)
             .setScannerMode(scannerMode)
             .build()
 
     fun beginListeningForDocumentScannerOutputs(
-        onPageDocumentScanned: OnPageDocumentScannedCallback,
         onPDFDocumentScanned: OnPDFDocumentScannedCallback,
         onException: OnTaskFailedCallback
     ) {
@@ -40,10 +35,8 @@ internal class MLKitDocumentScanner(
                 if (result.resultCode == RESULT_OK) {
                     GmsDocumentScanningResult
                         .fromActivityResultIntent(result.data)
-                        ?.let { scanResult ->
-                            scanResult.pages?.let { onPageDocumentScanned.invoke(it) }
-                            scanResult.pdf?.let { onPDFDocumentScanned.invoke(it) }
-                        }
+                        ?.pdf
+                        ?.let { onPDFDocumentScanned.invoke(it) }
                 }
             }
 
