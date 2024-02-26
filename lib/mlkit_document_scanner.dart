@@ -1,7 +1,7 @@
 import 'mlkit_document_scanner_platform_interface.dart';
 
-class MlkitDocumentScanner {
+class MLKitDocumentScanner {
   Future<String?> getPlatformVersion() {
-    return MlkitDocumentScannerPlatform.instance.getPlatformVersion();
+    return MLKitDocumentScannerPlatform.instance.getPlatformVersion();
   }
 }

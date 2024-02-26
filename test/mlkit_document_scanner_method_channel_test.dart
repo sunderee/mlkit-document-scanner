@@ -5,8 +5,8 @@ import 'package:mlkit_document_scanner/mlkit_document_scanner_method_channel.dar
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelMlkitDocumentScanner platform =
-      MethodChannelMlkitDocumentScanner();
+  MethodChannelMLKitDocumentScanner platform =
+      MethodChannelMLKitDocumentScanner();
   const MethodChannel channel = MethodChannel('mlkit_document_scanner');
 
   setUp(() {

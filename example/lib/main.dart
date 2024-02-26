@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mlkit_document_scanner/mlkit_document_scanner.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _mlkitDocumentScannerPlugin = MlkitDocumentScanner();
+  final _mlkitDocumentScannerPlugin = MLKitDocumentScanner();
 
   @override
   void initState() {
@@ -32,7 +32,8 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _mlkitDocumentScannerPlugin.getPlatformVersion() ?? 'Unknown platform version';
+          await _mlkitDocumentScannerPlugin.getPlatformVersion() ??
+              'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
