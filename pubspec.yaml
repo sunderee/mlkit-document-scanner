@@ -19,6 +19,7 @@ topics:
   - machine-learning
   - mlkit
   - document-scanner
+  - mlkit-document-scanner
 
 flutter:
   plugin:
