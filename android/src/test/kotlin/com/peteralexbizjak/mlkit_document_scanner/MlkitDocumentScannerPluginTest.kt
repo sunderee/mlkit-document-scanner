@@ -1,0 +1,3 @@
+package com.peteralexbizjak.mlkit_document_scanner
+
+internal class MlkitDocumentScannerPluginTest
