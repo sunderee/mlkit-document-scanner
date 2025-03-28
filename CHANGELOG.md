@@ -1,3 +1,7 @@
+## 0.0.7
+
+This change updates the Dart/Flutter SDK version constraints and dependencies. It also sets the new repository URL.
+
 ## 0.0.6
 
 This change updates the Dart/Flutter SDK version constraints and dependencies.
