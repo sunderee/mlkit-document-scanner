@@ -1,3 +1,7 @@
+## 0.0.9
+
+Comment out import of `io.flutter:flutter_embedding_debug` and URL to Maven's repository URL to obtain `io.flutter:flutter_embedding_debug`.
+
 ## 0.0.8
 
 Update to version 0.0.8, upgrade Kotlin and Gradle versions, adjust compile and min SDK versions, and improve image data handling in the document scanner plugin.

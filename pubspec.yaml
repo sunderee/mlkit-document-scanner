@@ -1,6 +1,6 @@
 name: mlkit_document_scanner
 description: Flutter plugin bringing MLKit Document Scanner to Flutter. Available only for Android.
-version: 0.0.8
+version: 0.0.9
 repository: https://github.com/sunderee/mlkit-document-scanner
 
 environment:

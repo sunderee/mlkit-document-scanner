@@ -19,7 +19,7 @@ allprojects {
         google()
         mavenCentral()
         // Uncomment this line for development
-        maven { url 'https://storage.googleapis.com/download.flutter.io' }
+        // maven { url 'https://storage.googleapis.com/download.flutter.io' }
     }
 }
 
@@ -53,7 +53,7 @@ android {
 
     dependencies {
         // Uncomment this line for development
-        compileOnly 'io.flutter:flutter_embedding_debug:1.0.0-1d25906b4cf0076604a67360b21b1e092eb01b19'
+        // compileOnly 'io.flutter:flutter_embedding_debug:1.0.0-1d25906b4cf0076604a67360b21b1e092eb01b19'
         implementation 'com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1'
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.2.0'
