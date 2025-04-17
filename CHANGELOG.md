@@ -1,3 +1,7 @@
+## 0.0.8
+
+Update to version 0.0.8, upgrade Kotlin and Gradle versions, adjust compile and min SDK versions, and improve image data handling in the document scanner plugin.
+
 ## 0.0.7
 
 This change updates the Dart/Flutter SDK version constraints and dependencies. It also sets the new repository URL.
