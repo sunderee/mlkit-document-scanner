@@ -17,6 +17,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
+@ExperimentalStdlibApi
 class MlkitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private var library: MlkitDocumentScannerLibrary = MlkitDocumentScannerLibrary()
 
@@ -86,8 +87,7 @@ class MlkitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
             // Construct document scanner
             val scanner = library.buildGmsDocumentScanner(
                 maximumNumberOfPages = call.argument<Int>(ARGUMENT_NUMBER_OF_PAGES) ?: 1,
-                galleryImportAllowed = call.argument<Boolean>(ARGUMENT_GALLERY_IMPORT_ALLOWED)
-                    ?: false,
+                galleryImportAllowed = call.argument<Boolean>(ARGUMENT_GALLERY_IMPORT_ALLOWED) == true,
                 scannerMode = call.argument<Int>(ARGUMENT_SCANNER_MODE)?.let {
                     val allowedScannerModes = listOf(
                         GmsDocumentScannerOptions.SCANNER_MODE_FULL,

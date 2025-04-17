@@ -1,3 +1,7 @@
+## 0.0.10
+
+Update to version 0.0.10, add experimental API annotation, improve gallery import handling, and migrate example project to Gradle Kotlin DSL.
+
 ## 0.0.9
 
 Comment out import of `io.flutter:flutter_embedding_debug` and URL to Maven's repository URL to obtain `io.flutter:flutter_embedding_debug`.
