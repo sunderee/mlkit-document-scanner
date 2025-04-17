@@ -41,7 +41,6 @@ internal class MlkitDocumentScannerLibrary {
         }
 
         options = options.setScannerMode(scannerMode)
-
         return GmsDocumentScanning.getClient(options.build())
     }
 
@@ -63,17 +62,18 @@ internal class MlkitDocumentScannerLibrary {
                     eventSinkJPEG?.success(null)
                 } else {
                     Log.d(LOGGING_TAG, "JPEG pages count ${it.size}")
-                    eventSinkJPEG?.success(it.map { page ->
-                        page.imageUri.toFile().readBytes()
-                    })
+
+                    val dataToSend = it.map { page -> page.imageUri.toFile().readBytes() }
+                    eventSinkJPEG?.success(dataToSend)
                 }
-
-
             }
+
             result.pdf.let {
                 if (it != null && it.pageCount > 0) {
                     Log.d(LOGGING_TAG, "PDF pages count ${it.pageCount}")
-                    eventSinkPDF?.success(it.uri.toFile().readBytes())
+
+                    val dataToSend = it.uri.toFile().readBytes()
+                    eventSinkPDF?.success(dataToSend)
                 } else {
                     Log.d(LOGGING_TAG, "null response (result.pdf)")
                     eventSinkPDF?.success(null)

@@ -34,7 +34,6 @@ class MlkitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
         eventChannelJPEG = EventChannel(flutterPluginBinding.binaryMessenger, EVENT_CHANNEL_JPEG)
         eventChannelPDF = EventChannel(flutterPluginBinding.binaryMessenger, EVENT_CHANNEL_PDF)
 
-
         channel.setMethodCallHandler(this)
         eventChannelJPEG.setStreamHandler(object : EventChannel.StreamHandler {
             override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
@@ -97,7 +96,7 @@ class MlkitDocumentScannerPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
                     )
                     if (allowedScannerModes.contains(it)) it else GmsDocumentScannerOptions.SCANNER_MODE_FULL
                 } ?: GmsDocumentScannerOptions.SCANNER_MODE_FULL,
-                resultMode = DocumentScannerResultMode.values()[call.argument<Int>(
+                resultMode = DocumentScannerResultMode.entries[call.argument<Int>(
                     ARGUMENT_RESULT_MODE
                 ) ?: 2],
             )
