@@ -1,3 +1,7 @@
+## 0.0.11
+
+Upgrade dependencies across the board, from the native Android configuration, to the Flutter plugin itself.
+
 ## 0.0.10
 
 Update to version 0.0.10, add experimental API annotation, improve gallery import handling, and migrate example project to Gradle Kotlin DSL.
