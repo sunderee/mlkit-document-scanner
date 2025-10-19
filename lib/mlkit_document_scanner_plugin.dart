@@ -6,29 +6,32 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 /// Implementation of the [MlkitDocumentScanner] interface.
 final class MlkitDocumentScannerPlugin extends PlatformInterface
     implements MlkitDocumentScanner {
-  static const _methodChannel =
-      MethodChannel('mlkit_document_scanner_method_channel');
-  static const _eventChannelJPEG =
-      EventChannel('mlkit_document_scanner_event_channel_jpeg');
-  static const _eventChannelPDF =
-      EventChannel('mlkit_document_scanner_event_channel_pdf');
+  static const _methodChannel = MethodChannel(
+    'mlkit_document_scanner_method_channel',
+  );
+  static const _eventChannelJPEG = EventChannel(
+    'mlkit_document_scanner_event_channel_jpeg',
+  );
+  static const _eventChannelPDF = EventChannel(
+    'mlkit_document_scanner_event_channel_pdf',
+  );
 
   MlkitDocumentScannerPlugin({required super.token});
 
   /// This stream contains full stream of JPEG data that came from the scan.
   @override
   Stream<List<Uint8List>?> get jpegScanResults {
-    return _eventChannelJPEG
-        .receiveBroadcastStream()
-        .map((event) => (event as List<dynamic>).cast<Uint8List>());
+    return _eventChannelJPEG.receiveBroadcastStream().map(
+      (event) => (event as List<dynamic>).cast<Uint8List>(),
+    );
   }
 
   /// This stream contains full stream of PDF data that came from the scan.
   @override
   Stream<Uint8List?> get pdfScanResults {
-    return _eventChannelPDF
-        .receiveBroadcastStream()
-        .map((event) => event as Uint8List);
+    return _eventChannelPDF.receiveBroadcastStream().map(
+      (event) => event as Uint8List,
+    );
   }
 
   /// This method starts the document scanner. It tries to mimic the official

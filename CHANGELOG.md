@@ -1,3 +1,7 @@
+## 0.0.12
+
+Formatting improvements.
+
 ## 0.0.11
 
 Upgrade dependencies across the board, from the native Android configuration, to the Flutter plugin itself.
