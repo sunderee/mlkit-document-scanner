@@ -39,38 +39,41 @@ final class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () =>
                     _mlkitDocumentScannerPlugin.startDocumentScanner(
-                  maximumNumberOfPages: 1,
-                  galleryImportAllowed: true,
-                  scannerMode: MlkitDocumentScannerMode.full,
-                  resultMode: DocumentScannerResultMode.both,
-                ),
+                      maximumNumberOfPages: 1,
+                      galleryImportAllowed: true,
+                      scannerMode: MlkitDocumentScannerMode.full,
+                      resultMode: DocumentScannerResultMode.both,
+                    ),
                 child: const Text('Start scanner'),
               ),
               StreamBuilder(
                 stream: _jpegDocumentStream,
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<Uint8List>?> data) {
-                  return data.hasData && data.data != null
-                      ? ListView(
-                          shrinkWrap: true,
-                          children: data.data!
-                              .map((item) => Image.memory(item))
-                              .toList(),
-                        )
-                      : const Text('No JPEG data yet');
-                },
+                builder:
+                    (
+                      BuildContext context,
+                      AsyncSnapshot<List<Uint8List>?> data,
+                    ) {
+                      return data.hasData && data.data != null
+                          ? ListView(
+                              shrinkWrap: true,
+                              children: data.data!
+                                  .map((item) => Image.memory(item))
+                                  .toList(),
+                            )
+                          : const Text('No JPEG data yet');
+                    },
               ),
               StreamBuilder(
                 stream: _pdfDocumentStream,
                 builder:
                     (BuildContext context, AsyncSnapshot<Uint8List?> data) {
-                  return data.hasData && data.data != null
-                      ? SizedBox(
-                          height: MediaQuery.of(context).size.height - 32,
-                          child: SfPdfViewer.memory(data.data!),
-                        )
-                      : const Text('No PDF data yet');
-                },
+                      return data.hasData && data.data != null
+                          ? SizedBox(
+                              height: MediaQuery.of(context).size.height - 32,
+                              child: SfPdfViewer.memory(data.data!),
+                            )
+                          : const Text('No PDF data yet');
+                    },
               ),
             ],
           ),

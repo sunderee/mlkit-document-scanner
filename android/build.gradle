@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.9.1'
+        classpath 'com.android.tools.build:gradle:8.12.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -54,9 +54,9 @@ android {
     dependencies {
         // Uncomment this line for development
         // compileOnly 'io.flutter:flutter_embedding_debug:1.0.0-1d25906b4cf0076604a67360b21b1e092eb01b19'
-        implementation 'com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1'
+        implementation 'com.google.android.gms:play-services-mlkit-document-scanner:16.0.0'
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
-        testImplementation 'org.mockito:mockito-core:5.2.0'
+        testImplementation 'org.mockito:mockito-core:5.20.0'
     }
 
     testOptions {

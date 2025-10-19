@@ -3,8 +3,8 @@ description: "Demonstrates how to use the mlkit_document_scanner plugin."
 publish_to: 'none'
 
 environment:
-  sdk: "3.7.2"
-  flutter: "3.29.3"
+  sdk: ">=3.9.2"
+  flutter: ">=3.35.6"
   
 dependencies:
   flutter:
@@ -13,10 +13,10 @@ dependencies:
   mlkit_document_scanner:
     path: ../
   
-  syncfusion_flutter_pdfviewer: ^29.1.38
+  syncfusion_flutter_pdfviewer: ^31.2.2
 
 dev_dependencies:
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
