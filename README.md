@@ -1,5 +1,8 @@
 # MLKit Document Scanner
 
+> [!WARNING]  
+> This package is no longer going to be maintained. Its replacement is [`simplest_document_scanner`](https://github.com/sunderee/simplest-document-scanner).
+
 Flutter plugin bringing [MLKit Document Scanner](https://developers.google.com/ml-kit/vision/doc-scanner)
 to Flutter.
 
